@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JOYEA · 包装创新分享 · 2026.06.17</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600&family=Noto+Sans+SC:wght@300;400;500&display=swap');
+
+    :root {
+      --ink: #111118;
+      --ink-mid: #5a5a72;
+      --ink-light: #9090a8;
+      --accent: #1e4d82;
+      --accent-warm: #b87333;
+      --line: #e4e4ec;
+      --bg: #f8f8f6;
+      --white: #ffffff;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: 56px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 52px;
+      transition: background 0.4s, border-color 0.4s;
+    }
+    nav.scrolled {
+      background: rgba(10,14,22,0.94);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      backdrop-filter: blur(16px);
+    }
+    .nav-logo {
+      font-size: 13px; letter-spacing: 0.18em;
+      color: rgba(255,255,255,0.9); font-weight: 500;
+      text-transform: uppercase;
+    }
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a {
+      font-size: 11px; letter-spacing: 0.12em; color: rgba(255,255,255,0.38);
+      text-decoration: none; text-transform: uppercase; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: rgba(255,255,255,0.8); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+      background: #080d17;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 70% 55% at 15% 55%, rgba(30,77,130,0.32) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 70% at 85% 25%, rgba(184,115,51,0.12) 0%, transparent 50%),
+        linear-gradient(160deg, #060b14 0%, #080d17 50%, #0e1520 100%);
+    }
+    .hero-noise {
+      position: absolute; inset: 0; opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 180px;
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      text-align: center; padding: 80px 48px; max-width: 800px;
+    }
+    .hero-tag {
+      display: inline-block;
+      padding: 5px 18px;
+      border: 1px solid rgba(184,115,51,0.45);
+      font-size: 10px; letter-spacing: 0.28em; color: #b87333;
+      text-transform: uppercase; margin-bottom: 48px;
+    }
+    .hero-title {
+      font-family: 'Noto Serif SC', serif;
+      font-size: clamp(30px, 4.5vw, 54px);
+      font-weight: 300; color: #fff;
+      line-height: 1.35; letter-spacing: 0.02em; margin-bottom: 18px;
+    }
+    .hero-title em { font-style: normal; color: #b87333; white-space: nowrap; }
+    .hero-sub {
+      font-size: 12px; letter-spacing: 0.12em;
+      color: rgba(255,255,255,0.35); margin-bottom: 64px;
+      text-transform: uppercase;
+    }
+    .hero-line {
+      width: 1px; height: 52px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.25), transparent);
+      margin: 0 auto 48px;
+    }
+    .hero-meta {
+      display: flex; gap: 64px; justify-content: center; flex-wrap: wrap;
+    }
+    .meta-item { text-align: center; }
+    .meta-label {
+      font-size: 9px; letter-spacing: 0.2em; color: rgba(255,255,255,0.28);
+      text-transform: uppercase; margin-bottom: 8px;
+    }
+    .meta-value { font-size: 15px; color: rgba(255,255,255,0.8); font-weight: 400; }
+    .hero-caret {
+      position: absolute; bottom: 36px; left: 50%;
+      transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      animation: breathe 2.4s ease-in-out infinite;
+    }
+    .hero-caret span {
+      font-size: 9px; letter-spacing: 0.22em;
+      color: rgba(255,255,255,0.22); text-transform: uppercase;
+    }
+    .hero-caret::after {
+      content: '';
+      display: block; width: 1px; height: 36px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.2), transparent);
+    }
+    @keyframes breathe { 0%,100%{opacity:0.3} 50%{opacity:0.9} }
+
+    /* ── SECTION ── */
+    section { padding: 96px 52px; }
+    .container { max-width: 1040px; margin: 0 auto; }
+
+    .eyebrow {
+      font-size: 9px; letter-spacing: 0.28em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 20px;
+      display: flex; align-items: center; gap: 14px;
+    }
+    .eyebrow::before {
+      content: ''; display: block;
+      width: 20px; height: 1px; background: var(--accent);
+    }
+    .sec-title {
+      font-family: 'Noto Serif SC', serif;
+      font-size: clamp(22px, 3vw, 36px);
+      font-weight: 300; color: var(--ink);
+      line-height: 1.3; margin-bottom: 16px;
+    }
+    .sec-lead {
+      font-size: 15px; color: var(--ink-mid);
+      max-width: 580px; line-height: 1.85;
+    }
+
+    /* ── ABOUT ── */
+    #about { background: var(--white); border-top: 1px solid var(--line); }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: start;
+    }
+    .about-quote {
+      font-family: 'Noto Serif SC', serif;
+      font-size: clamp(18px, 2.2vw, 24px);
+      font-weight: 300; color: var(--ink);
+      line-height: 1.6;
+      padding-left: 20px;
+      border-left: 2px solid var(--accent-warm);
+      margin-bottom: 36px;
+    }
+    .about-text { font-size: 14px; color: var(--ink-mid); line-height: 1.95; }
+    .about-text p + p { margin-top: 18px; }
+
+    .stat-row {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px;
+      background: var(--line); border: 1px solid var(--line); margin-top: 0;
+    }
+    .stat-box {
+      background: var(--white); padding: 28px 24px;
+    }
+    .stat-label {
+      font-size: 9px; letter-spacing: 0.2em; color: var(--ink-light);
+      text-transform: uppercase; margin-bottom: 10px;
+    }
+    .stat-val {
+      font-family: 'Noto Serif SC', serif;
+      font-size: 17px; color: var(--ink); font-weight: 400; margin-bottom: 6px;
+    }
+    .stat-sub { font-size: 12px; color: var(--ink-light); line-height: 1.6; }
+
+    /* ── AGENDA ── */
+    #agenda { background: var(--bg); }
+    .agenda-top {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 72px; align-items: end; margin-bottom: 56px;
+    }
+    .topic-list { display: flex; flex-direction: column; gap: 1px; }
+    .topic-item {
+      display: grid; grid-template-columns: 48px 1fr;
+      gap: 0; background: var(--line);
+      cursor: default;
+      transition: background 0.25s;
+    }
+    .topic-item:hover { background: #e0e6f0; }
+    .topic-num-col {
+      background: var(--white); border-right: 1px solid var(--line);
+      display: flex; align-items: flex-start; justify-content: center;
+      padding-top: 24px;
+      font-size: 10px; letter-spacing: 0.15em; color: var(--ink-light);
+      font-variant-numeric: tabular-nums;
+    }
+    .topic-body-col { background: var(--white); padding: 24px 28px; }
+    .topic-title {
+      font-size: 15px; font-weight: 500; color: var(--ink); margin-bottom: 6px;
+    }
+    .topic-desc { font-size: 13px; color: var(--ink-mid); line-height: 1.75; }
+
+    /* ── SKETCHES ── */
+    #sketches { background: #f2f1ed; border-top: 1px solid var(--line); }
+    .sketches-head {
+      display: grid; grid-template-columns: 280px 1fr;
+      gap: 64px; align-items: end; margin-bottom: 52px;
+    }
+    .sketch-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .sketch-card {
+      background: var(--white);
+      overflow: hidden;
+      border: 1px solid rgba(0,0,0,0.07);
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: zoom-in;
+    }
+    .sketch-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 36px rgba(0,0,0,0.09);
+    }
+    .sketch-card img {
+      width: 100%; aspect-ratio: 3/4;
+      object-fit: contain; display: block;
+      padding: 24px 20px; background: #fafaf8;
+    }
+    /* first card in first row - taller portrait */
+    .sketch-card.portrait img { aspect-ratio: 2/3; }
+
+    .sketch-teaser {
+      margin-top: 36px;
+      text-align: center;
+      padding: 28px 24px;
+      border: 1px dashed rgba(30,77,130,0.25);
+      background: rgba(30,77,130,0.025);
+    }
+    .sketch-teaser-text {
+      font-family: 'Noto Serif SC', serif;
+      font-size: 15px; font-weight: 300;
+      color: var(--ink-mid); letter-spacing: 0.04em;
+    }
+    .sketch-teaser-sub {
+      font-size: 11px; color: var(--ink-light);
+      letter-spacing: 0.1em; margin-top: 8px;
+    }
+
+    /* ── CLOSING ── */
+    #closing {
+      background: #080d17; color: #fff; text-align: center;
+    }
+    .closing-title {
+      font-family: 'Noto Serif SC', serif;
+      font-size: clamp(22px, 3vw, 38px);
+      font-weight: 300; color: #fff;
+      line-height: 1.45; margin-bottom: 20px;
+    }
+    .closing-body {
+      font-size: 14px; color: rgba(255,255,255,0.48);
+      max-width: 520px; margin: 0 auto 56px; line-height: 1.9;
+    }
+    .closing-row {
+      display: flex; gap: 72px; justify-content: center;
+      flex-wrap: wrap; margin-bottom: 56px;
+    }
+    .c-item { text-align: center; }
+    .c-label {
+      font-size: 9px; letter-spacing: 0.22em;
+      color: rgba(255,255,255,0.25); text-transform: uppercase; margin-bottom: 8px;
+    }
+    .c-val { font-size: 16px; color: rgba(255,255,255,0.82); font-weight: 400; }
+    .c-val.gold { color: #b87333; }
+    .hr { width: 48px; height: 1px; background: rgba(255,255,255,0.1); margin: 0 auto 40px; }
+    .brand-sig {
+      font-size: 11px; letter-spacing: 0.26em;
+      color: rgba(255,255,255,0.18); text-transform: uppercase;
+    }
+
+    /* ── LIGHTBOX ── */
+    .lightbox {
+      display: none; position: fixed; inset: 0; z-index: 9999;
+      background: rgba(0,0,0,0.92);
+      align-items: center; justify-content: center; cursor: zoom-out;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img {
+      max-width: 78vw; max-height: 84vh;
+      object-fit: contain;
+    }
+    .lb-close {
+      position: absolute; top: 28px; right: 40px;
+      color: rgba(255,255,255,0.5); font-size: 22px; cursor: pointer;
+      transition: color 0.2s;
+    }
+    .lb-close:hover { color: #fff; }
+
+    /* ── FADE ── */
+    .fade-up {
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 0.75s ease, transform 0.75s ease;
+    }
+    .fade-up.visible { opacity: 1; transform: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      section { padding: 72px 24px; }
+      nav { padding: 0 24px; }
+      .nav-links { display: none; }
+      .about-grid { grid-template-columns: 1fr; gap: 48px; }
+      .agenda-top { grid-template-columns: 1fr; gap: 36px; }
+      .sketches-head { grid-template-columns: 1fr; gap: 28px; }
+      .sketch-grid { grid-template-columns: repeat(2, 1fr); }
+      .hero-meta { gap: 36px; }
+      .closing-row { gap: 40px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <span class="nav-logo">JOYEA</span>
+    <ul class="nav-links">
+      <li><a href="#about">关于仅一</a></li>
+      <li><a href="#agenda">分享议题</a></li>
+      <li><a href="#sketches">创新袋型</a></li>
+      <li><a href="#closing">活动信息</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-noise"></div>
+    <div class="hero-content">
+      <div class="hero-tag">Packaging Innovation Sharing · June 2026</div>
+      <h1 class="hero-title">
+        包装，是产品创新<em>最近的入口</em>
+      </h1>
+      <p class="hero-sub">JOYEA × P&amp;G China Research Center</p>
+      <div class="hero-line"></div>
+      <div class="hero-meta">
+        <div class="meta-item">
+          <div class="meta-label">Date</div>
+          <div class="meta-value">2026年6月17日</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Location</div>
+          <div class="meta-value">宝洁北京研究院</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-caret"><span>scroll</span></div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container">
+      <div class="about-grid fade-up">
+        <div>
+          <div class="eyebrow">About JOYEA</div>
+          <h2 class="sec-title">当包装不再只是容器</h2>
+          <blockquote class="about-quote">它就成为产品创新的入口。</blockquote>
+          <div class="about-text">
+            <p>仅一长期服务于药品、乳品、食品、日化等行业，提供从成型、灌装、检测到整线自动化的系统解决方案。</p>
+            <p>我们关注的不只是"怎么把产品装进去"，更关注包装形态如何影响用户体验、货架表达、生产效率与商业化速度。</p>
+          </div>
+        </div>
+        <div>
+          <div class="stat-row">
+            <div class="stat-box">
+              <div class="stat-label">Core Industries</div>
+              <div class="stat-val">药品 · 乳品 · 食品</div>
+              <div class="stat-sub">日化 · 保健品</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">Capability</div>
+              <div class="stat-val">成型到整线</div>
+              <div class="stat-sub">自动化系统集成</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">Specialty</div>
+              <div class="stat-val">柔性包装工艺</div>
+              <div class="stat-sub">Stick · 软袋 · 听装</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">Technology</div>
+              <div class="stat-val">数字化集成</div>
+              <div class="stat-sub">AI视觉 · 数字孪生</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AGENDA -->
+  <section id="agenda">
+    <div class="container">
+      <div class="agenda-top fade-up">
+        <div>
+          <div class="eyebrow">Sharing Agenda</div>
+          <h2 class="sec-title">现场分享<br>重点</h2>
+        </div>
+        <p class="sec-lead">来自制造现场的一线观察——不只是技术参数，而是从创意到量产每个关键节点的真实思考。</p>
+      </div>
+
+      <div class="topic-list fade-up">
+
+        <div class="topic-item">
+          <div class="topic-num-col">01</div>
+          <div class="topic-body-col">
+            <div class="topic-title">仅一是谁</div>
+            <div class="topic-desc">主要产品线与行业覆盖；发展历程与核心能力；实验室验证与产线实拍；与快消领域头部品牌的合作沉淀。</div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <div class="topic-num-col">02</div>
+          <div class="topic-body-col">
+            <div class="topic-title">终端产品创新</div>
+            <div class="topic-desc">我们如何与品牌方共同定义"让用户想拿起来"的包装——从剂型形态到包装轮廓，几个真实案例的创新路径还原。</div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <div class="topic-num-col">03</div>
+          <div class="topic-body-col">
+            <div class="topic-title">设备创新</div>
+            <div class="topic-desc">双充填技术、规格一键切换、多规格兼容产线、数字孪生远程运维——围绕柔性与效率的设备端突破。</div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <div class="topic-num-col">04</div>
+          <div class="topic-body-col">
+            <div class="topic-title">仅一131模式 <span style="font-size:12px;font-weight:300;color:var(--ink-light);margin-left:8px">客户产品从概念到上市的快速落地</span></div>
+            <div class="topic-desc"><strong>1个能力</strong>：精于定制化智能装备与现代工业工程（IE）的整套设计服务。<br><strong>3种发展模式</strong>：一号园（装备销售与技术服务）、一家园（共享产能与OEM/ODM代工，帮助客户完成前期市场验证）、一方园（以技术+资本入股，助力行业标杆企业）。<br><strong>1个优先</strong>：能力与资源优先服务丹阳本地项目。三者联动，互利共赢。</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SKETCHES -->
+  <section id="sketches">
+    <div class="container">
+      <div class="sketches-head fade-up">
+        <div>
+          <div class="eyebrow">Concept Sketches</div>
+          <h2 class="sec-title">创新袋型<br>草图</h2>
+        </div>
+        <p class="sec-lead">每一个形态背后，都是对使用场景、货架辨识度与生产可行性的综合思考。</p>
+      </div>
+
+      <div class="sketch-grid fade-up">
+        <div class="sketch-card" onclick="openLightbox('bag2.png')">
+          <img src="bag2.png" alt="创新袋型草图">
+        </div>
+        <div class="sketch-card" onclick="openLightbox('bag3.png')">
+          <img src="bag3.png" alt="创新袋型草图">
+        </div>
+        <div class="sketch-card" onclick="openLightbox('bag4.jpg')">
+          <img src="bag4.jpg" alt="创新袋型草图">
+        </div>
+        <div class="sketch-card" onclick="openLightbox('bag5.jpg')">
+          <img src="bag5.jpg" alt="创新袋型草图">
+        </div>
+        <div class="sketch-card" onclick="openLightbox('bag6.png')">
+          <img src="bag6.png" alt="创新袋型草图">
+        </div>
+        <div class="sketch-card" onclick="openLightbox('bag7.png')">
+          <img src="bag7.png" alt="创新袋型草图">
+        </div>
+      </div>
+
+      <div class="sketch-teaser fade-up">
+        <div class="sketch-teaser-text">还有更多尚未公开的袋型概念——</div>
+        <div class="sketch-teaser-sub">期待在现场与您面对面展开</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLOSING -->
+  <section id="closing">
+    <div class="container">
+      <div class="fade-up">
+        <h2 class="closing-title">期待6月17日，<br>在北京与您相遇</h2>
+        <p class="closing-body">
+          包装创新从来不是一家公司单独完成的事。<br>
+          我们带着制造现场的真实积累而来，希望在这里找到值得共同探索的方向。
+        </p>
+        <div class="closing-row">
+          <div class="c-item">
+            <div class="c-label">Date</div>
+            <div class="c-val gold">2026年6月17日</div>
+          </div>
+          <div class="c-item">
+            <div class="c-label">Location</div>
+            <div class="c-val">宝洁北京研究院</div>
+          </div>
+          <div class="c-item">
+            <div class="c-label">Presenter</div>
+            <div class="c-val">江苏仅一联合智造</div>
+          </div>
+        </div>
+        <div class="hr"></div>
+        <div class="brand-sig">JOYEA · 江苏仅一联合智造 · Flexible Packaging Automation</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <span class="lb-close" onclick="closeLightbox()">✕</span>
+    <img id="lb-img" src="" alt="">
+  </div>
+
+  <script>
+    // Nav
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    // Fade-up
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+
+    // Lightbox
+    function openLightbox(src) {
+      document.getElementById('lb-img').src = src;
+      document.getElementById('lightbox').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+  </script>
+
+</body>
+</html>
