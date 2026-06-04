@@ -27,6 +27,7 @@
       font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
       line-height: 1.7;
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
 
     /* ── NAV ── */
@@ -68,6 +69,18 @@
         radial-gradient(ellipse 50% 70% at 85% 25%, rgba(184,115,51,0.12) 0%, transparent 50%),
         linear-gradient(160deg, #060b14 0%, #080d17 50%, #0e1520 100%);
     }
+    .hero-photo {
+      position: absolute; inset: 0;
+      background: url('aerial.png') center center / cover no-repeat;
+      opacity: 0.28;
+      filter: saturate(0.5) contrast(1.1);
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,1) 50%, rgba(0,0,0,0.5) 100%);
+      -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,1) 50%, rgba(0,0,0,0.5) 100%);
+    }
+    .hero-photo-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(8,13,23,0.55) 0%, rgba(8,13,23,0.3) 40%, rgba(8,13,23,0.6) 100%);
+    }
     .hero-noise {
       position: absolute; inset: 0; opacity: 0.025;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
@@ -88,9 +101,18 @@
       font-family: 'Noto Serif SC', serif;
       font-size: clamp(30px, 4.5vw, 54px);
       font-weight: 300; color: #fff;
-      line-height: 1.35; letter-spacing: 0.02em; margin-bottom: 18px;
+      line-height: 1.55; letter-spacing: 0.02em; margin-bottom: 18px;
     }
-    .hero-title em { font-style: normal; color: #b87333; white-space: nowrap; }
+    .hero-title .line-orange {
+      display: block;
+      font-style: normal; color: #b87333;
+      font-size: clamp(36px, 5.2vw, 64px);
+      font-weight: 400; letter-spacing: 0.06em;
+    }
+    .hero-title .line-sub {
+      display: block;
+      font-weight: 300;
+    }
     .hero-sub {
       font-size: 12px; letter-spacing: 0.12em;
       color: rgba(255,255,255,0.35); margin-bottom: 64px;
@@ -185,6 +207,7 @@
       font-size: 17px; color: var(--ink); font-weight: 400; margin-bottom: 6px;
     }
     .stat-sub { font-size: 12px; color: var(--ink-light); line-height: 1.6; }
+    .stat-sub-small { font-size: 11px; color: var(--ink-light); line-height: 1.7; margin-top: 8px; }
 
     /* ── AGENDA ── */
     #agenda { background: var(--bg); }
@@ -240,9 +263,6 @@
       object-fit: contain; display: block;
       padding: 24px 20px; background: #fafaf8;
     }
-    /* first card in first row - taller portrait */
-    .sketch-card.portrait img { aspect-ratio: 2/3; }
-
     .sketch-teaser {
       margin-top: 36px;
       text-align: center;
@@ -345,12 +365,15 @@
 
   <!-- HERO -->
   <section class="hero" id="hero">
+    <div class="hero-photo"></div>
+    <div class="hero-photo-overlay"></div>
     <div class="hero-bg"></div>
     <div class="hero-noise"></div>
     <div class="hero-content">
       <div class="hero-tag">Packaging Innovation Sharing · June 2026</div>
       <h1 class="hero-title">
-        <em>破界共生</em>，以智造之力驱动产品创新
+        <span class="line-orange">破界共生</span>
+        <span class="line-sub">以智造之力驱动产品创新</span>
       </h1>
       <p class="hero-sub">JOYEA × P&amp;G China Technology Center</p>
       <div class="hero-line"></div>
@@ -375,7 +398,7 @@
         <div>
           <div class="eyebrow">About JOYEA</div>
           <h2 class="sec-title">仅一联合智造</h2>
-          <blockquote class="about-quote">包装，是产品创新最近的入口。</blockquote>
+          <blockquote class="about-quote">始于2001年的信任，以工程实力推动宝洁国产设备替代从可能走向标杆。</blockquote>
           <div class="about-text">
             <p>仅一自1992年成立以来，始终致力于为乳品、药品、保健品、食品、日化等行业客户提供稳定、高效、柔性、可持续的听装、条包、软袋包装设备解决方案。</p>
             <p>我们关注的不只是"怎么把产品装进去"，更关注包装形态如何影响用户体验、货架表达、生产效率与商业化速度。</p>
@@ -386,6 +409,7 @@
             <div class="stat-box">
               <div class="stat-label">Core Industries</div>
               <div class="stat-val" style="font-size:14px;line-height:1.8">药品 · 乳品 · 保健品<br>食品 · 日化</div>
+              <div class="stat-sub-small">百强药企70%的信任之选<br>市面听装婴配奶粉80%源自仅一设备</div>
             </div>
             <div class="stat-box">
               <div class="stat-label">Flexible Packaging</div>
@@ -397,9 +421,9 @@
               <div class="stat-sub">AI视觉 · 数字孪生 · VLS智慧仓储</div>
             </div>
             <div class="stat-box">
-              <div class="stat-label">Global Partners</div>
-              <div class="stat-val">世界500强</div>
-              <div class="stat-sub">长期服务顶级快消与大健康品牌</div>
+              <div class="stat-label">Co-Innovation</div>
+              <div class="stat-val">与跨国公司共同创新</div>
+              <div class="stat-sub">助力概念落地</div>
             </div>
           </div>
         </div>
