@@ -44,9 +44,10 @@
       backdrop-filter: blur(16px);
     }
     .nav-logo {
-      font-size: 13px; letter-spacing: 0.18em;
-      color: rgba(255,255,255,0.9); font-weight: 500;
-      text-transform: uppercase;
+      display: block;
+      height: 24px;
+      width: auto;
+      filter: brightness(1.1) contrast(1.05);
     }
     .nav-links { display: flex; gap: 36px; list-style: none; }
     .nav-links a {
@@ -354,7 +355,7 @@
 
   <!-- NAV -->
   <nav id="nav">
-    <span class="nav-logo">JOYEA</span>
+    <img class="nav-logo" src="logo.png" alt="JOYEA">
     <ul class="nav-links">
       <li><a href="#about">关于仅一</a></li>
       <li><a href="#agenda">分享议题</a></li>
